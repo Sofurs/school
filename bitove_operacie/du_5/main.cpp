@@ -3,22 +3,20 @@
 #include <iostream>
 
 int main() {
-  int cislo_1, pocet_0 = 0, pocet_1 = 0;
+  int cislo_1, pocet_1 = 0;
+  int velkost_premennej = sizeof(cislo_1) * 8;
   std::cout << "Zadaj cislo: ";
   std::cin >> cislo_1;
 
-  for (int i = 32; i > 0; i--) {
-    int temp = cislo_1;
-    if ((temp &= 1) == 1)
-      pocet_1++;
-    else
-      pocet_0++;
+  int temp = cislo_1;
+  for (int i = velkost_premennej; i > 0; i--) {
+    pocet_1 += temp & 1;
 
     // std::cout << temp << "\n";
-    cislo_1 >>= 1;
+    temp >>= 1;
   }
 
-  std::cout << "Cislo " << cislo_1 << " obsahuje " << pocet_1 << " jednotiek a " << pocet_0 << " nul.\n";
+  std::cout << "Cislo " << cislo_1 << " obsahuje " << pocet_1 << " jednotiek a " << velkost_premennej - pocet_1 << " nul.\n";
 
   return 0;
 }
