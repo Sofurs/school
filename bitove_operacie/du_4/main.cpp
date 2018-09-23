@@ -4,15 +4,18 @@
 #include <iostream>
 
 int main() {
-  int cislo = 0;
+  int cislo = 0 ^ (1 << 31);
+  int modifikator = 0;
   cislo = ~cislo;
-  cislo *= -1;
 
-  std::cout << "\n" << cislo << "\n";
-
-  for (int i = 31; i > 0; i--) {
-    std::cout << (cislo & 1);
-    cislo >>= 1;
+  for(int i = 1; i < 31; i++) {
+    int temp = (cislo ^ (modifikator |= 1));
+    std::cout << i << (i < 10 ? " ." : ".") << "cislo je: " << temp << ", Bin: ";
+    for(int j = 31; j >= 0; j--) {
+      std::cout << (j % 4 == 3 ? " " : "") << ((temp >> j) & 1);
+    }
+    std::cout << "\n";
+    modifikator <<= 1;
   }
 
   return 0;
