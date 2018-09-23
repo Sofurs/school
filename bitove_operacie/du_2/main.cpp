@@ -1,5 +1,5 @@
 //Matej Las, 23.9.2018
-//
+//program zisli ci sa posledne bity dvoch cisel rovnaju alebo su rozdielne
 #include <iostream>
 
 int main() {
