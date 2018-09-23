@@ -7,12 +7,12 @@ int main() {
   std::cout << "Zadaj cislo: ";
   std::cin >> cislo_1;
 
-  while(cislo_1 == 0) {
+  while(!cislo_1) {
     std::cout << "Zadaj ine cislo ako 0: ";
     std::cin >> cislo_1;
   }
 
-  while((cislo_1 & 1) == 0) {
+  while(!(cislo_1 & 1)) {
     cislo_1 >>= 1;
   }
 
