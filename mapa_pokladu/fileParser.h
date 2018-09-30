@@ -8,6 +8,7 @@
 #define MAX_Y 3
 
 typedef int t_Map[MAX_X][MAX_Y];
+typedef int t_MapBig[8][6];
 
 class fileParser {
 public:
@@ -18,7 +19,9 @@ public:
   void parseHeader();
   void parseLine();
 
-  void print2Darray();
+  void print2DArray();
+
+  void copy2DArray(t_MapBig &arr, int start_x, int start_y);
 
 private:
   std::string nameOfFile;
@@ -30,5 +33,5 @@ private:
   bool headerChecked = false;
   bool fileError = false;
 
-  t_Map map;
+  t_Map mapChunks;
 };

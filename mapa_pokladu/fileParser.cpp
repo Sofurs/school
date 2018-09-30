@@ -8,8 +8,6 @@ nameOfFile(name) {
       while(!readLine() && !fileError)
         readLine();
   }
-
-  print2Darray();
 }
 
 fileParser::~fileParser() {
@@ -45,21 +43,30 @@ void fileParser::parseLine() {
     for (int i = 0; i < line.length(); i++) {
         if (line[i] == ' ') {}
         else {
-            map[lineNumber][position] = (int)line[i] - '0';
+            mapChunks[lineNumber][position] = (int)line[i] - '0';
             position++;
         }
     }
     lineNumber++;
 }
 
-void fileParser::print2Darray() {
+void fileParser::print2DArray() {
     if (!fileError) {
         for(int i = 0; i < MAX_X; i++) {
             for(int j = 0; j < MAX_Y; j++) {
-                std::cout << map[i][j] << " ";
+                std::cout << mapChunks[i][j] << " ";
             }
             std::cout << '\n';
         }
         std::cout << "\n";
     }
+}
+
+void fileParser::copy2DArray(t_MapBig &arr, int start_x, int start_y) {
+	for (int i = 0; i < MAX_X; i++, start_x++) {
+		for (int j = 0; j < MAX_Y; j++, start_y++) {
+			arr[start_x][start_y] = mapChunks[i][j];
+		}
+		start_y -= 3;
+	}
 }
