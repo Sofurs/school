@@ -27,6 +27,9 @@ bool fileParser::readLine() {
         parseLine();
     }
 
+    if (myFile.eof())
+        lineNumber = 0;
+
     return myFile.eof();
 }
 
