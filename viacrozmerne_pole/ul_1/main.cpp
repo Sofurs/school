@@ -8,6 +8,7 @@
 #define MAX_NUM 10
 
 typedef int t_2DArray[MAX_X][MAX_Y];
+typedef int t_2DArrayTransposed[MAX_Y][MAX_X];
 
 struct ValuesMaxMin {
     int max = 0;
@@ -125,19 +126,29 @@ void printMaxMinLine(t_2DArray &arr) {
     std::cout << "Riadok s min hodnotou: " << S_2DArrayMaxMinLine.row_sum_min << ", s polohou x: " << S_2DArrayMaxMinLine.row_index_min << '\n';
 }
 
+void transpose2DArray(t_2DArray &arr, t_2DArrayTransposed &tempArr) {
+    for(int i = 0; i < MAX_X; i++) {
+        for(int j = 0; j < MAX_Y; j++) {
+            tempArr[j][i] = arr[i][j]; 
+        }
+    }
+}
+
 int main() {
 
     t_2DArray arr;
 
     fill2DArray(arr);
 
-    print2DArray(arr);
+    t_2DArrayTransposed copyArr;
 
-    printMaxMinLine(arr);
-
-    flipLines(arr, S_2DArrayMaxMinLine.row_index_min, S_2DArrayMaxMinLine.row_index_max);
+    transpose2DArray(arr, copyArr);
 
     print2DArray(arr);
+
+    std::cout << "\n\n\n";
+
+    print2DArray(copyArr); 
 
     return 0;
 }
