@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_X 20
-#define MAX_Y 20
+#define MAX_X 4
+#define MAX_Y 4
 
-#define MAX_NUM 100
+#define MAX_NUM 10
 
 typedef int t_2DArray[MAX_X][MAX_Y];
 
@@ -32,7 +32,7 @@ void fill2DArray(t_2DArray &arr) {
     srand(time(NULL));
     for(int i = 0; i < MAX_X; i++) {
         for(int j = 0; j < MAX_Y; j++) {
-            arr[i][j] = rand() % MAX_NUM;
+            arr[i][j] = rand() % MAX_NUM + 1;
         }
     }
 }
@@ -51,13 +51,13 @@ void findMaxMin(t_2DArray &arr) {
         for(int j = 0; j < MAX_Y; j++) {
             if (arr[i][j] > S_2DArrayMaxMin.max) {
                 S_2DArrayMaxMin.max = arr[i][j];
-                S_2DArrayMaxMin.max_pos_row = i; 
-                S_2DArrayMaxMin.max_pos_col = j; 
-            }   
+                S_2DArrayMaxMin.max_pos_row = i;
+                S_2DArrayMaxMin.max_pos_col = j;
+            }
             if(arr[i][j] < S_2DArrayMaxMin.min) {
                 S_2DArrayMaxMin.min = arr[i][j];
-                S_2DArrayMaxMin.min_pos_row = i; 
-                S_2DArrayMaxMin.min_pos_col = j; 
+                S_2DArrayMaxMin.min_pos_row = i;
+                S_2DArrayMaxMin.min_pos_col = j;
             }
         }
     }
@@ -85,7 +85,7 @@ void mirror2DArrayByY(t_2DArray &arr) {
 
 void printMaxMin(t_2DArray &arr) {
     findMaxMin(arr);
-    
+
     std::cout << "Maximalna hodnota: " << S_2DArrayMaxMin.max << ", s polohou x: " << S_2DArrayMaxMin.max_pos_row << ", s y: " << S_2DArrayMaxMin.max_pos_col << '\n';
     std::cout << "Minimalna hodnota: " << S_2DArrayMaxMin.min << ", s polohou x: " << S_2DArrayMaxMin.min_pos_row << ", s y: " << S_2DArrayMaxMin.min_pos_col << '\n';
 }
@@ -100,28 +100,44 @@ void findMaxMinLine(t_2DArray &arr) {
         if (sumOfLine > S_2DArrayMaxMinLine.row_sum_max) {
             S_2DArrayMaxMinLine.row_sum_max = sumOfLine;
             S_2DArrayMaxMinLine.row_index_max = i;
-        }   
+        }
         if(sumOfLine < S_2DArrayMaxMinLine.row_sum_min) {
             S_2DArrayMaxMinLine.row_sum_min = sumOfLine;
-            S_2DArrayMaxMinLine.row_index_min = i; 
+            S_2DArrayMaxMinLine.row_index_min = i;
         }
 
-        sumOfLine = 0;   
+        sumOfLine = 0;
     }
+}
+
+void flipLines(t_2DArray &arr, int line1, int line2) {
+  for(int i = 0; i < MAX_Y; i++) {
+    arr[line1][i] ^= arr[line2][i];
+    arr[line2][i] ^= arr[line1][i];
+    arr[line1][i] ^= arr[line2][i];
+  }
 }
 
 void printMaxMinLine(t_2DArray &arr) {
     findMaxMinLine(arr);
-    
+
     std::cout << "Riadok s max hodnotou: " << S_2DArrayMaxMinLine.row_sum_max << ", s polohou x: " << S_2DArrayMaxMinLine.row_index_max << '\n';
     std::cout << "Riadok s min hodnotou: " << S_2DArrayMaxMinLine.row_sum_min << ", s polohou x: " << S_2DArrayMaxMinLine.row_index_min << '\n';
-} 
+}
 
 int main() {
 
     t_2DArray arr;
 
     fill2DArray(arr);
+
+    print2DArray(arr);
+
+    printMaxMinLine(arr);
+
+    flipLines(arr, S_2DArrayMaxMinLine.row_index_min, S_2DArrayMaxMinLine.row_index_max);
+
+    print2DArray(arr);
 
     return 0;
 }
