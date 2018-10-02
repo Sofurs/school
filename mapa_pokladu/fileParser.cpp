@@ -42,22 +42,8 @@ void fileParser::parseLine() {
     int position = 0;
     for (int i = 0; i < line.length(); i++) {
         if (line[i] != ' ') {
-            if((int)line[i + 1] != ' '  && (line.length() - 1 != i)) {
-                if((int)line[i + 2] != ' ') {
-                    mapChunks[lineNumber][position] = ((((int)line[i] - '0') * 10) + ((int)line[i + 1] - '0')) * 10 + ((int)line[i + 2] - '0');
-                    i+=2;
-                    position++;
-                }
-                else { 
-                    mapChunks[lineNumber][position] = (((int)line[i] - '0') * 10) + ((int)line[i + 1] - '0');
-                    i++;
-                    position++;
-                }
-            }
-            else {
             mapChunks[lineNumber][position] = (int)line[i] - '0';
             position++;
-            }
         }
     }
     lineNumber++;

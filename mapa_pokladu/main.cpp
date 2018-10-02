@@ -6,7 +6,7 @@ struct values {
   int max_count = 0;
   int max_number;
 
-  int min_count = 1000;
+  int min_count = 10;
   int min_number;
 } S_2DArrayFrequency;
 
@@ -16,15 +16,6 @@ void flipEvenOddLines(t_MapBig &arr) {
       arr[i][j] ^= arr[i + 1][j];
       arr[i + 1][j] ^= arr[i][j];
       arr[i][j] ^= arr[i + 1][j];
-    }
-  }
-}
-
-int findNumberOfNumbers(t_MapBig &arr, int num) {
-  int values[100];
-  for(int i = 0; i < MAX_X * 2; i += 2) {
-    for(int j = 0; j < MAX_Y * 2; j++) {
-
     }
   }
 }
@@ -86,16 +77,13 @@ int main() {
   file3.copy2DArray(map, 4, 0);
   file4.copy2DArray(map, 4, 3);
 
-  printMap(map);
-
-  std::cout << "\n\n\n";
-
   flipEvenOddLines(map);
 
   frequencyOfNumbers(map);
 
   printMap(map);
 
+  std::cin.get();
 
   return 0;
 }
