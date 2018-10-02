@@ -83,7 +83,5 @@ int main() {
 
   printMap(map);
 
-  std::cin.get();
-
   return 0;
 }
