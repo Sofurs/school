@@ -1,13 +1,12 @@
-#include "fileParser.h"
+#include "fileParser.hpp"
 
-fileParser::fileParser(std::string name) :
-nameOfFile(name) {
-  myFile.open(nameOfFile, std::fstream::in);
+fileParser::fileParser(std::string name) : nameOfFile(name) {
+    myFile.open(nameOfFile, std::fstream::in);
 
-  if (myFile.is_open()) {
-      while(!readLine() && !fileError)
-        readLine();
-  }
+    if (myFile.is_open()) {
+        while (!readLine() && !fileError)
+            readLine();
+    }
 }
 
 fileParser::~fileParser() {
@@ -17,11 +16,10 @@ fileParser::~fileParser() {
 bool fileParser::readLine() {
     getline(myFile, line, '\n');
 
-    if(!headerChecked) {
+    if (!headerChecked) {
         parseHeader();
         headerChecked = true;
-    }
-    else {
+    } else {
         parseLine();
     }
 
@@ -32,7 +30,7 @@ bool fileParser::readLine() {
 }
 
 void fileParser::parseHeader() {
-    if((int)line[0] - '0' != MAX_X || (int)line[2] - '0' != MAX_Y) {
+    if ((int)line[0] - '0' != MAX_X || (int)line[2] - '0' != MAX_Y) {
         fileError = true;
         std::cout << "Wrong input file: " << nameOfFile << "\n";
     }
@@ -51,8 +49,8 @@ void fileParser::parseLine() {
 
 void fileParser::print2DArray() {
     if (!fileError) {
-        for(int i = 0; i < MAX_X; i++) {
-            for(int j = 0; j < MAX_Y; j++) {
+        for (int i = 0; i < MAX_X; i++) {
+            for (int j = 0; j < MAX_Y; j++) {
                 std::cout << mapChunks[i][j] << " ";
             }
             std::cout << '\n';
@@ -62,10 +60,10 @@ void fileParser::print2DArray() {
 }
 
 void fileParser::copy2DArray(t_MapBig &arr, int start_x, int start_y) {
-	for (int i = 0; i < MAX_X; i++, start_x++) {
-		for (int j = 0; j < MAX_Y; j++, start_y++) {
-			arr[start_x][start_y] = mapChunks[i][j];
-		}
-		start_y -= 3;
-	}
+    for (int i = 0; i < MAX_X; i++, start_x++) {
+        for (int j = 0; j < MAX_Y; j++, start_y++) {
+            arr[start_x][start_y] = mapChunks[i][j];
+        }
+        start_y -= 3;
+    }
 }
