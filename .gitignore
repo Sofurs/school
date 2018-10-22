@@ -1,3 +1,4 @@
 *.out
 main
 main.exe
+*.hpp.gch
