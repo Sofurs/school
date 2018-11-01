@@ -86,7 +86,7 @@ Matrix Matrix::operator=(const Matrix &ptr) {
 Matrix Matrix::operator+(const Matrix &ptr) {
     try {
         if (matrixRows != ptr.matrixRows || matrixCols != ptr.matrixCols)
-            throw "Different sizes of matrix";
+            throw "Different sizes of matrices : +";
 
         Matrix temp(matrixRows, matrixCols);
 
@@ -106,7 +106,7 @@ Matrix Matrix::operator+(const Matrix &ptr) {
 Matrix Matrix::operator-(const Matrix &ptr) {
     try {
         if (matrixRows != ptr.matrixRows || matrixCols != ptr.matrixCols) {
-            throw "Different sizes of matrix";
+            throw "Different sizes of matrices : -";
         }
 
         Matrix temp(matrixRows, matrixCols);
@@ -127,7 +127,7 @@ Matrix Matrix::operator-(const Matrix &ptr) {
 Matrix Matrix::operator*(const Matrix &ptr) {
     try {
         if (matrixCols != ptr.matrixRows) {
-            throw "Wrong size of matrix";
+            throw "Wrong sizes of matrices : *";
         }
 
         Matrix temp(matrixRows, ptr.matrixCols);
