@@ -6,13 +6,11 @@
 class Matrix {
    public:
     Matrix();
+    Matrix(std::fstream *file);
     Matrix(int row, int col);
-    Matrix(std::string name);
     ~Matrix();
 
     Matrix(const Matrix &);
-
-    bool isFileOpen() const;
 
     void getSize();
     void printSize() const;
@@ -28,8 +26,7 @@ class Matrix {
     Matrix operator*(const Matrix &);
 
    private:
-    std::string nameOfFile;
-    std::fstream myFile;
+    std::fstream *myFile;
     int **matrix;
     int matrixRows;
     int matrixCols;

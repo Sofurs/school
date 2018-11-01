@@ -3,17 +3,14 @@
 Matrix::Matrix() {
 }
 
+Matrix::Matrix(std::fstream *file) : myFile(file) {
+}
+
 Matrix::Matrix(int row, int col) : matrixRows(row), matrixCols(col) {
     initMatrix();
 }
 
-Matrix::Matrix(std::string name) : nameOfFile("data/" + name) {
-    myFile.open(nameOfFile, std::ios::in);
-}
-
 Matrix::~Matrix() {
-    myFile.close();
-
     for (int i = 0; i < matrixRows; i++) {
         delete[] matrix[i];
     }
@@ -22,8 +19,6 @@ Matrix::~Matrix() {
 }
 
 Matrix::Matrix(const Matrix &ptr) {
-    nameOfFile = ptr.nameOfFile;
-
     matrixRows = ptr.matrixRows;
     matrixCols = ptr.matrixCols;
 
@@ -36,17 +31,13 @@ Matrix::Matrix(const Matrix &ptr) {
     }
 }
 
-bool Matrix::isFileOpen() const {
-    return myFile.is_open();
-}
-
 void Matrix::getSize() {
-    myFile >> matrixRows;
-    myFile >> matrixCols;
+    *myFile >> matrixRows;
+    *myFile >> matrixCols;
 }
 
 void Matrix::printSize() const {
-    std::cout << "\nMatrix size: " << matrixRows << ", " << matrixCols << '\n';
+    std::cout << "Matrix size: " << matrixRows << ", " << matrixCols << '\n';
 }
 
 void Matrix::initMatrix(int rows, int cols) {
@@ -63,13 +54,12 @@ void Matrix::initMatrix(int rows, int cols) {
 void Matrix::fillMatrix() {
     for (int i = 0; i < matrixRows; i++) {
         for (int j = 0; j < matrixCols; j++) {
-            myFile >> matrix[i][j];
+            *myFile >> matrix[i][j];
         }
     }
 }
 
 void Matrix::printMatrix() const {
-    std::cout << '\n';
     for (int i = 0; i < matrixRows; i++) {
         for (int j = 0; j < matrixCols; j++) {
             std::cout << matrix[i][j] << " ";
@@ -134,5 +124,29 @@ Matrix Matrix::operator-(const Matrix &ptr) {
     }
 }
 
-Matrix Matrix::operator*(const Matrix &) {
+Matrix Matrix::operator*(const Matrix &ptr) {
+    try {
+        if (matrixCols != ptr.matrixRows) {
+            throw "Wrong size of matrix";
+        }
+
+        Matrix temp(matrixRows, ptr.matrixCols);
+
+        int row;
+        int col;
+
+        for (row = 0; row < matrixRows; row++) {
+            for (col = 0; col < ptr.matrixCols; col++) {
+                int value = 0;
+                for (int x = 0, y = 0; x < matrixCols; x++, y++) {
+                    value += matrix[row][x] * ptr.matrix[y][col];
+                }
+                temp.matrix[row][col] = value;
+            }
+        }
+        return temp;
+    } catch (const char *ex) {
+        std::cout << "\n*** " << ex << " ***\n";
+        exit(1);
+    }
 }
