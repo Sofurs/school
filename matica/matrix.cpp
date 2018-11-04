@@ -138,8 +138,8 @@ Matrix Matrix::operator*(const Matrix &ptr) {
         for (row = 0; row < matrixRows; row++) {
             for (col = 0; col < ptr.matrixCols; col++) {
                 int value = 0;
-                for (int x = 0, y = 0; x < matrixCols; x++, y++) {
-                    value += matrix[row][x] * ptr.matrix[y][col];
+                for (int x = 0; x < matrixCols; x++) {
+                    value += matrix[row][x] * ptr.matrix[x][col];
                 }
                 temp.matrix[row][col] = value;
             }
