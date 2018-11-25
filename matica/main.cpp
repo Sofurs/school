@@ -20,16 +20,21 @@ int main() {
             gem.emplace_back(&myFile);
 
             // matrix.at(i).printSize();
-            gem.at(i).printSize();
             // matrix.at(i).printMatrix();
-            gem.at(i).printMatrix();
         }
 
         myFile.close();
     }
 
     gem.at(0).copyMatrix();
+    gem.at(0).printBuffer();
+    std::cout << '\n';
     gem.at(0).directOperation();
+    gem.at(0).printBuffer();
+    std::cout << '\n';
+    gem.at(0).reverseOperation();
+    std::cout << '\n';
+    gem.at(0).printResult();
 
     // Matrix addition;
     // addition = matrix.at(0) + matrix.at(1);

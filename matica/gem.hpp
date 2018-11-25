@@ -17,8 +17,11 @@ class Gem : public Matrix {
     void copyMatrix();
     void rowAddition(int row1, int row2, int destRow, int pos);
     void diagCheck(int row);
+    void result();
+    double calcVars(int row);
 
     void printBuffer() const;
+    void printResult() const;
 
    private:
     int **buffer;
