@@ -6,28 +6,30 @@
 class Matrix {
    public:
     Matrix();
-    Matrix(std::fstream *file);
+    Matrix(std::fstream *myFile);
     Matrix(int row, int col);
+    Matrix(const Matrix &);
     ~Matrix();
 
-    Matrix(const Matrix &);
-
-    void getSize();
     void printSize() const;
-
-    void initMatrix(int rows = 0, int cols = 0);
-
-    void fillMatrix();
     void printMatrix() const;
+
+    int getMatrixRows() const;
+    int getMatrixCols() const;
+
+    void swapRows(int **&arr, int row1, int row2);
+    void swapCols(int **&arr, int row1, int row2);
 
     Matrix operator=(const Matrix &);
     Matrix operator+(const Matrix &);
     Matrix operator-(const Matrix &);
     Matrix operator*(const Matrix &);
 
-   private:
-    std::fstream *myFile;
+   protected:
     int **matrix;
     int matrixRows;
     int matrixCols;
+
+    void initMatrix(int **&arr);
+    void initMatrix(int **&arr, int rows, int cols);
 };
