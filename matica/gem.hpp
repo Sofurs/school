@@ -4,8 +4,9 @@
 
 #include "matrix.hpp"
 
-class Gem : public Matrix {
-   public:
+class Gem : public Matrix
+{
+  public:
     Gem();
     Gem(std::fstream *myFile);
     Gem(const Gem &);
@@ -15,7 +16,7 @@ class Gem : public Matrix {
     void reverseOperation();
 
     void copyMatrix();
-    void rowAddition(int row1, int row2, int destRow, int pos);
+    void rowAddition(int row1, int row2, int pos);
     void diagCheck(int row);
     void result();
     double calcVars(int row);
@@ -23,7 +24,7 @@ class Gem : public Matrix {
     void printBuffer() const;
     void printResult() const;
 
-   private:
+  private:
     int **buffer;
     double *variables;
 };

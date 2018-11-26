@@ -25,7 +25,7 @@ Gem::~Gem() {
 void Gem::directOperation() {
     for (int i = 0; i < matrixCols - 2; i++) {
         for (int j = i; j < matrixRows - 1; j++) {
-            rowAddition(i, j + 1, j + 1, i);
+            rowAddition(i, j + 1, i);
         }
     }
 }
@@ -46,7 +46,7 @@ void Gem::copyMatrix() {
     }
 }
 
-void Gem::rowAddition(int row1, int row2, int destRow, int pos) {
+void Gem::rowAddition(int row1, int row2, int pos) {
     int mult1 = abs(buffer[row2][pos]);
     int mult2 = abs(buffer[row1][pos]);
 
@@ -57,7 +57,7 @@ void Gem::rowAddition(int row1, int row2, int destRow, int pos) {
     }
 
     for (int i = 0; i < matrixCols; i++) {
-        buffer[destRow][i] = buffer[row1][i] * mult1 + buffer[row2][i] * mult2;
+        buffer[row2][i] = buffer[row1][i] * mult1 + buffer[row2][i] * mult2;
     }
 
     diagCheck(pos);
