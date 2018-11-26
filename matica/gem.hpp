@@ -4,9 +4,8 @@
 
 #include "matrix.hpp"
 
-class Gem : public Matrix
-{
-  public:
+class Gem : public Matrix {
+   public:
     Gem();
     Gem(std::fstream *myFile);
     Gem(const Gem &);
@@ -24,7 +23,7 @@ class Gem : public Matrix
     void printBuffer() const;
     void printResult() const;
 
-  private:
+   private:
     int **buffer;
     double *variables;
 };

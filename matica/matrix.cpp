@@ -81,7 +81,7 @@ void Matrix::swapRows(int **&arr, int row1, int row2) {
         if (row1 > matrixRows - 1 || row2 > matrixRows - 1)
             throw "Matrix out of range\n";
 
-        for(int i = 0; i < matrixCols; i++) {
+        for (int i = 0; i < matrixCols; i++) {
             int temp = arr[row1][i];
             arr[row1][i] = arr[row2][i];
             arr[row2][i] = temp;
