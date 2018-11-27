@@ -25,7 +25,8 @@ Gem::~Gem() {
 void Gem::directOperation() {
     for (int i = 0; i < matrixCols - 2; i++) {
         for (int j = i; j < matrixRows - 1; j++) {
-            rowAddition(i, j + 1, i);
+            rowAddition(i, j + 1);
+            diagCheck(i);
         }
     }
 }
@@ -46,11 +47,11 @@ void Gem::copyMatrix() {
     }
 }
 
-void Gem::rowAddition(int row1, int row2, int pos) {
-    int mult1 = abs(buffer[row2][pos]);
-    int mult2 = abs(buffer[row1][pos]);
+void Gem::rowAddition(int row1, int row2) {
+    int mult1 = abs(buffer[row2][row1]);
+    int mult2 = abs(buffer[row1][row1]);
 
-    if (buffer[row1][pos] * buffer[row2][pos] > 0) {
+    if (buffer[row1][row1] * buffer[row2][row1] > 0) {
         for (int i = 0; i < matrixCols; i++) {
             buffer[row1][i] *= -1;
         }
@@ -59,8 +60,6 @@ void Gem::rowAddition(int row1, int row2, int pos) {
     for (int i = 0; i < matrixCols; i++) {
         buffer[row2][i] = buffer[row1][i] * mult1 + buffer[row2][i] * mult2;
     }
-
-    diagCheck(pos);
 }
 
 void Gem::diagCheck(int row) {
@@ -69,7 +68,9 @@ void Gem::diagCheck(int row) {
             throw "Matrix out of range\n";
 
         if (!buffer[row][row]) {
-            swapRows(buffer, row, row + 1);
+            std::cout << "No solution without parameter\n";
+            printBuffer();
+            exit(1);
         }
 
     } catch (const char *ex) {
@@ -79,11 +80,13 @@ void Gem::diagCheck(int row) {
 }
 
 void Gem::result() {
-    if (buffer[matrixRows - 1][matrixCols - 1] == buffer[matrixRows - 1][matrixCols - 2])
+    if (buffer[matrixRows - 1][matrixCols - 1] == buffer[matrixRows - 1][matrixCols - 2]) {
         std::cout << "Infinite number of solutions\n";
-    else if (!buffer[matrixRows - 1][matrixCols - 2])
+        exit(1);
+    } else if (!buffer[matrixRows - 1][matrixCols - 2]) {
         std::cout << "No solutions\n";
-    else
+        exit(1);
+    } else
         std::cout << "One solution\n";
 }
 

@@ -15,7 +15,7 @@ class Gem : public Matrix {
     void reverseOperation();
 
     void copyMatrix();
-    void rowAddition(int row1, int row2, int pos);
+    void rowAddition(int row1, int row2);
     void diagCheck(int row);
     void result();
     double calcVars(int row);
