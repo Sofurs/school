@@ -87,6 +87,44 @@ double Horner::bisection() {
     return middlePoint;
 }
 
+long double Horner::regulaFalsa() {
+    long double middlePoint;
+    int iter = 0;
+
+    if (calc(lowerBound) * calc(upperBound) >= 0) {
+        std::cout << "Wrong boundaries";
+        return (double)NULL;
+    }
+
+    do {
+        if (iter > 1000) break;
+
+        std::cout << "UB: " << upperBound << '\n';
+        std::cout << "LB: " << lowerBound << '\n';
+        std::cout << "MP: " << middlePoint << '\n';
+        std::cout << '\n';
+
+        middlePoint = (lowerBound * calc(upperBound) - upperBound * calc(lowerBound)) / (calc(lowerBound) - calc(upperBound));
+
+        if (calc(middlePoint) == 0) {
+            return middlePoint;
+        } else if (calc(lowerBound) * calc(middlePoint) < 0) {
+            upperBound = middlePoint;
+        } else {
+            lowerBound = middlePoint;
+        }
+
+        std::cout << "UB: " << upperBound << '\n';
+        std::cout << "LB: " << lowerBound << '\n';
+        std::cout << "MP: " << middlePoint << '\n';
+        std::cout << '\n';
+
+        iter++;
+    } while (abs(upperBound - lowerBound) >= precision);
+
+    return middlePoint;
+}
+
 void Horner::printArr() const {
     for (int i = sizeOfArr - 1; i >= 0; i--) {
         std::cout << koef[i] << " ";
