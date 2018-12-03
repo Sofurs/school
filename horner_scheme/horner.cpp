@@ -97,14 +97,12 @@ long double Horner::regulaFalsa() {
     }
 
     do {
-        if (iter > 1000) break;
-
-        std::cout << "UB: " << upperBound << '\n';
-        std::cout << "LB: " << lowerBound << '\n';
-        std::cout << "MP: " << middlePoint << '\n';
-        std::cout << '\n';
-
         middlePoint = (lowerBound * calc(upperBound) - upperBound * calc(lowerBound)) / (calc(lowerBound) - calc(upperBound));
+
+        // if(middlePoint < 1e-300) {
+        //     std::cout << "Variable overflow!" << '\n';
+        //     return (double)NULL;
+        // }
 
         if (calc(middlePoint) == 0) {
             return middlePoint;
@@ -114,12 +112,6 @@ long double Horner::regulaFalsa() {
             lowerBound = middlePoint;
         }
 
-        std::cout << "UB: " << upperBound << '\n';
-        std::cout << "LB: " << lowerBound << '\n';
-        std::cout << "MP: " << middlePoint << '\n';
-        std::cout << '\n';
-
-        iter++;
     } while (abs(upperBound - lowerBound) >= precision);
 
     return middlePoint;
