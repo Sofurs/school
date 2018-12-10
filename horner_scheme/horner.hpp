@@ -14,7 +14,7 @@ class Horner {
     double calc(double val);
     double calcIntegral();
     double bisection();
-    long double regulaFalsa();
+    double regulaFalsi();
 
     void printArr() const;
 
@@ -23,14 +23,13 @@ class Horner {
     void setUpperBound(double val);
     void setPrecision(double val);
 
-
    private:
     double *koef;
     int sizeOfArr;
     double x;
 
-    long double lowerBound;
-    long double upperBound;
+    double lowerBound;
+    double upperBound;
     double precision;
 
     void initArray();

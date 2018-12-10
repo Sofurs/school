@@ -33,17 +33,19 @@ int main() {
     polynomial.at(1).setUpperBound(4);
     polynomial.at(1).setPrecision(0.01);
     polynomial.at(1).printArr();
-    std::cout << "Vysledok: " << polynomial.at(1).regulaFalsa() << '\n';
+    std::cout << "Vysledok: " << polynomial.at(1).regulaFalsi() << '\n';
 
     polynomial.at(2).setLowerBound(-3);
     polynomial.at(2).setUpperBound(3);
     polynomial.at(2).setPrecision(0.001);
     polynomial.at(2).printArr();
-    std::cout << "Vysledok: " << polynomial.at(2).regulaFalsa() << '\n';
+    std::cout << "Vysledok: " << polynomial.at(2).regulaFalsi() << '\n';
+        std::cout << "Vysledok: " << polynomial.at(2).bisection() << '\n';
+
 
     polynomial.at(3).setLowerBound(-3);
     polynomial.at(3).setUpperBound(5);
     polynomial.at(3).setPrecision(0.0001);
     polynomial.at(3).printArr();
-    std::cout << "Vysledok: " << polynomial.at(3).regulaFalsa() << '\n';
+    std::cout << "Vysledok: " << polynomial.at(3).regulaFalsi() << '\n';
 }

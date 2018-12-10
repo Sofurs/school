@@ -87,8 +87,8 @@ double Horner::bisection() {
     return middlePoint;
 }
 
-long double Horner::regulaFalsa() {
-    long double middlePoint;
+double Horner::regulaFalsi() {
+    double middlePoint = lowerBound, previous_middlePoint;
     int iter = 0;
 
     if (calc(lowerBound) * calc(upperBound) >= 0) {
@@ -97,12 +97,8 @@ long double Horner::regulaFalsa() {
     }
 
     do {
-        middlePoint = (lowerBound * calc(upperBound) - upperBound * calc(lowerBound)) / (calc(lowerBound) - calc(upperBound));
-
-        // if(middlePoint < 1e-300) {
-        //     std::cout << "Variable overflow!" << '\n';
-        //     return (double)NULL;
-        // }
+        previous_middlePoint = middlePoint;
+        middlePoint = (lowerBound * calc(upperBound) - upperBound * calc(lowerBound)) / (calc(upperBound) - calc(lowerBound));
 
         if (calc(middlePoint) == 0) {
             return middlePoint;
@@ -112,7 +108,7 @@ long double Horner::regulaFalsa() {
             lowerBound = middlePoint;
         }
 
-    } while (abs(upperBound - lowerBound) >= precision);
+    } while (fabs(middlePoint - previous_middlePoint) >= precision);
 
     return middlePoint;
 }
