@@ -40,8 +40,7 @@ int main() {
     polynomial.at(2).setPrecision(0.001);
     polynomial.at(2).printArr();
     std::cout << "Vysledok: " << polynomial.at(2).regulaFalsi() << '\n';
-        std::cout << "Vysledok: " << polynomial.at(2).bisection() << '\n';
-
+    std::cout << "Vysledok: " << polynomial.at(2).bisection() << '\n';
 
     polynomial.at(3).setLowerBound(-3);
     polynomial.at(3).setUpperBound(5);
