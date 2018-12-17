@@ -1,6 +1,6 @@
 #include <iostream>
 
-int NSD(int a, int b) {
+int gcd(int a, int b) {
     try {
         if (a < 0 || b < 0) {
             throw "A of b is lower than zero!";
@@ -9,9 +9,9 @@ int NSD(int a, int b) {
         if (a == b) {
             return a;
         } else if (a > b) {
-            return NSD(a - b, b);
+            return gcd(a - b, b);
         } else {
-            return NSD(a, b - a);
+            return gcd(a, b - a);
         }
 
     } catch (const char *ex) {
@@ -21,5 +21,5 @@ int NSD(int a, int b) {
 }
 
 int main() {
-    std::cout << NSD(25, 5) << '\n';
+    std::cout << gcd(25, 5) << '\n';
 }
