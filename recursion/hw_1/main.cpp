@@ -1,27 +1,18 @@
 #include <iostream>
 
-void printLeft(const char left, int n) {
-    if(n == 0) {
+void printRec(const char a, int n) {
+    if(n <= 0) {
         return;
     } else {
-        std::cout << left;
-        printLeft(left, n - 1);
-    }
-}
-
-void printRight(const char right, int n) {
-    if(n == 0) {
-        return;
-    } else {
-        std::cout << right;
-        printRight(right, n - 1);
+        std::cout << a;
+        printRec(a, n - 1);
     }
 }
 
 void printOut(const char a, const char b, const char c, int n) {
-    printLeft(a, n);
+    printRec(a, n);
     std::cout << b;
-    printRight(c, n);
+    printRec(c, n);
 }
 
 int main() {
