@@ -111,6 +111,9 @@ int main() {
         }
 
         sqlite3_finalize(stmt);
+
+        sqlite3_exec(db, "DROP TABLE Students", nullptr, nullptr, nullptr);
+        sqlite3_exec(db, "DROP TABLE Results", nullptr, nullptr, nullptr);
         sqlite3_close(db);
 
     } catch (const char *err) {
