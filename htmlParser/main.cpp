@@ -13,9 +13,7 @@ int main() {
     char temp;
     char option;
 
-    while (!inFile.eof()) {
-        inFile >> temp;
-
+    while (inFile >> temp) {
         if (temp == '<')
             option = 't';  // tag
         else if (temp == '>') {
@@ -29,6 +27,10 @@ int main() {
         else if (option == 'c')
             textFile << temp;
     }
+
+    inFile.close();
+    tagFile.close();
+    textFile.close();
 
     return 0;
 }
