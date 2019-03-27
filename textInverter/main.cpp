@@ -16,10 +16,8 @@ int main() {
             cmp = tolower(temp);
             if (cmp != temp) {
                 outFile << cmp;
-                std::cout << cmp << '\n';
             } else {
                 outFile << (char)toupper(temp);
-                std::cout << (char)toupper(temp) << '\n';
             }
         }
     }
