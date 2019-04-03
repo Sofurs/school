@@ -70,8 +70,12 @@ void deleteSportsman(Sportsman* ptr) {
 }
 
 void showResults(Sportsman* ptr) {
+    int pos;
     for (int i = 0; i < num; i++) {
-        std::cout << ptr[i].num << " => " << ptr[i].time << '\n';
+        int min = ptr[i].time / 6000;
+        int sec = (ptr[i].time % 6000) / 100;
+        int ms = (ptr[i].time % 6000) % 100;
+        std::cout << i + 1 << " " << ptr[i].num << " " << min << " " << sec << " " << ms << '\n';
     }
 }
 
